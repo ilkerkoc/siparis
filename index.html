@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Çıtkırıldım Fındık ve Fındık Ürünleri Giresunnuts Sipariş Formu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* CSS: Önceki kodda kullanılan aynı stiller buraya dahildir */
+        body { font-family: Arial, sans-serif; background-color: #f4f4f9; padding: 20px; }
+        .container { max-width: 600px; margin: 0 auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: #38761d; font-size: 1.5em; }
+        .product-group { border: 1px solid #ddd; border-radius: 5px; padding: 10px; margin-bottom: 20px; }
+        .product-group h3 { margin-top: 0; color: #b76c33; font-size: 1.2em; }
+        .option { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px dashed #eee; }
+        .product-info { display: flex; flex-direction: column; flex-grow: 1; padding-right: 10px; }
+        .weight-price-row { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        .unit-price { font-size: 12px; color: #555; margin-top: 2px; }
+        .sub-total { font-weight: bold; color: #007bff; min-width: 70px; text-align: right; }
+        .quantity-control { display: flex; align-items: center; margin-left: 10px; min-width: 100px; }
+        .quantity-control button { background-color: #38761d; color: white; border: none; padding: 8px 12px; cursor: pointer; border-radius: 4px; font-size: 16px; line-height: 1; }
+        .quantity-control input { width: 40px; text-align: center; border: 1px solid #ccc; margin: 0 5px; padding: 7px 0; font-size: 16px; -moz-appearance: textfield; appearance: textfield; }
+        .quantity-control input::-webkit-outer-spin-button,
+        .quantity-control input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+        .quantity-control button:hover { background-color: #2d5a15; }
+        .quantity-control button:active { transform: scale(0.95); }
+        #total-container { padding: 15px; background-color: #f6b26b; color: #4a2d1f; border-radius: 5px; margin-top: 20px; font-size: 1.3em; font-weight: bold; text-align: center; }
+        #proceedButton { width: 100%; padding: 15px; background-color: #38761d; color: white; border: none; border-radius: 5px; font-size: 18px; cursor: pointer; margin-top: 10px; transition: background-color 0.3s; }
+        #proceedButton:hover { background-color: #2d5a15; }
+        #proceedButton:disabled { background-color: #ccc; cursor: not-allowed; }
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5); }
+        .modal-content { background-color: #fefefe; margin: 5% auto; padding: 20px; border: 1px solid #888; border-radius: 8px; width: 90%; max-width: 500px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+        .close { color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
+        .close:hover { color: #000; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; color: #333; font-weight: bold; }
+        .form-group input, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 16px; box-sizing: border-box; }
+        .form-group textarea { resize: vertical; min-height: 80px; }
+        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: #38761d; }
+        .error-message { color: #d32f2f; font-size: 14px; margin-top: 5px; display: none; }
+        .form-group input.error, .form-group textarea.error { border-color: #d32f2f; }
+        @media (max-width: 600px) {
+            .container { padding: 15px; }
+            h1 { font-size: 1.2em; }
+            .option { flex-direction: column; align-items: flex-start; }
+            .quantity-control { margin-top: 10px; margin-left: 0; width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌰 Çıtkırıldım Fındık ve Fındık Ürünleri<br>Giresunnuts Sipariş Formu</h1>
+        <form id="orderForm">
+            
+            <div class="product-group">
+                <h3>Kabuklu Fındık</h3>
+                <div class="option" data-name="Kabuklu Fındık" data-weight="500 gr" data-price="225">
+                    <div class="product-info"><div class="weight-price-row"><span class="weight">500 gr</span><span class="sub-total">0 ₺</span></div><span class="unit-price">225,00 ₺ / adet</span></div>
+                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                </div>
+                <div class="option" data-name="Kabuklu Fındık" data-weight="1 kg" data-price="450">
+                    <div class="product-info"><div class="weight-price-row"><span class="weight">1 kg</span><span class="sub-total">0 ₺</span></div><span class="unit-price">450,00 ₺ / adet</span></div>
+                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                </div>
+            </div>
+
+            <div class="product-group">
+                <h3>Kavrulmuş Fındık</h3>
+                <div class="option" data-name="Kavrulmuş Fındık" data-weight="50 gr" data-price="65">
+                    <div class="product-info"><div class="weight-price-row"><span class="weight">50 gr</span><span class="sub-total">0 ₺</span></div><span class="unit-price">65,00 ₺ / adet</span></div>
+                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                </div>
+                <div class="option" data-name="Kavrulmuş Fındık" data-weight="100 gr" data-price="130">
+                    <div class="product-info"><div class="weight-price-row"><span class="weight">100 gr</span><span class="sub-total">0 ₺</span></div><span class="unit-price">130,00 ₺ / adet</span></div>
+                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                </div>
+                <div class="option" data-name="Kavrulmuş Fındık" data-weight="250 gr" data-price="325">
+                    <div class="product-info"><div class="weight-price-row"><span class="weight">250 gr</span><span class="sub-total">0 ₺</span></div><span class="unit-price">325,00 ₺ / adet</span></div>
+                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                </div>
+                <div class="option" data-name="Kavrulmuş Fındık" data-weight="500 gr" data-price="650">
+                    <div class="product-info"><div class="weight-price-row"><span class="weight">500 gr</span><span class="sub-total">0 ₺</span></div><span class="unit-price">650,00 ₺ / adet</span></div>
+                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                </div>
+                <div class="option" data-name="Kavrulmuş Fındık" data-weight="1 kg" data-price="1300">
+                    <div class="product-info"><div class="weight-price-row"><span class="weight">1 kg</span><span class="sub-total">0 ₺</span></div><span class="unit-price">1.300,00 ₺ / adet</span></div>
+                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                </div>
+            </div>
+
+            <div class="product-group">
+                <h3>Pikola Fındık</h3>
+                <div class="option" data-name="Pikola Fındık" data-weight="50 gr" data-price="87.5">
+                    <div class="product-info"><div class="weight-price-row"><span class="weight">50 gr</span><span class="sub-total">0 ₺</span></div><span class="unit-price">87,50 ₺ / adet</span></div>
+                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                </div>
+                <div class="option" data-name="Pikola Fındık" data-weight="100 gr" data-price="175">
+                    <div class="product-info"><div class="weight-price-row"><span class="weight">100 gr</span><span class="sub-total">0 ₺</span></div><span class="unit-price">175,00 ₺ / adet</span></div>
+                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                </div>
+                <div class="option" data-name="Pikola Fındık" data-weight="250 gr" data-price="437.5">
+                    <div class="product-info"><div class="weight-price-row"><span class="weight">250 gr</span><span class="sub-total">0 ₺</span></div><span class="unit-price">437,50 ₺ / adet</span></div>
+                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                </div>
+            </div>
+
+            <div class="product-group">
+                <h3>Krokan</h3>
+                <div class="option" data-name="Krokan" data-weight="40 gr" data-price="70">
+                    <div class="product-info"><div class="weight-price-row"><span class="weight">40 gr</span><span class="sub-total">0 ₺</span></div><span class="unit-price">70,00 ₺ / adet</span></div>
+                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                </div>
+                <div class="option" data-name="Krokan" data-weight="100 gr" data-price="175">
+                    <div class="product-info"><div class="weight-price-row"><span class="weight">100 gr</span><span class="sub-total">0 ₺</span></div><span class="unit-price">175,00 ₺ / adet</span></div>
+                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                </div>
+                <div class="option" data-name="Krokan" data-weight="250 gr" data-price="437.5">
+                    <div class="product-info"><div class="weight-price-row"><span class="weight">250 gr</span><span class="sub-total">0 ₺</span></div><span class="unit-price">437,50 ₺ / adet</span></div>
+                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                </div>
+                <div class="option" data-name="Krokan" data-weight="1 kg" data-price="1750">
+                    <div class="product-info"><div class="weight-price-row"><span class="weight">1 kg</span><span class="sub-total">0 ₺</span></div><span class="unit-price">1.750,00 ₺ / adet</span></div>
+                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                </div>
+            </div>
+            
+            <div class="product-group">
+                <h3>Fındık Ezmesi</h3>
+                <div class="option" data-name="Fındık Ezmesi" data-weight="100 gr" data-price="100">
+                    <div class="product-info"><div class="weight-price-row"><span class="weight">100 gr</span><span class="sub-total">0 ₺</span></div><span class="unit-price">100,00 ₺ / adet</span></div>
+                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                </div>
+                <div class="option" data-name="Fındık Ezmesi" data-weight="200 gr" data-price="200">
+                    <div class="product-info"><div class="weight-price-row"><span class="weight">200 gr</span><span class="sub-total">0 ₺</span></div><span class="unit-price">200,00 ₺ / adet</span></div>
+                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                </div>
+                <div class="option" data-name="Fındık Ezmesi" data-weight="300 gr" data-price="300">
+                    <div class="product-info"><div class="weight-price-row"><span class="weight">300 gr</span><span class="sub-total">0 ₺</span></div><span class="unit-price">300,00 ₺ / adet</span></div>
+                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                </div>
+                <div class="option" data-name="Fındık Ezmesi" data-weight="400 gr" data-price="400">
+                    <div class="product-info"><div class="weight-price-row"><span class="weight">400 gr</span><span class="sub-total">0 ₺</span></div><span class="unit-price">400,00 ₺ / adet</span></div>
+                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                </div>
+            </div>
+            
+            <div class="product-group">
+                <h3>Fındık Yağı</h3>
+                <div class="option" data-name="Fındık Yağı" data-weight="1 Lt" data-price="250">
+                    <div class="product-info"><div class="weight-price-row"><span class="weight">1 Lt</span><span class="sub-total">0 ₺</span></div><span class="unit-price">250,00 ₺ / adet</span></div>
+                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                </div>
+                <div class="option" data-name="Fındık Yağı" data-weight="2 Lt" data-price="500">
+                    <div class="product-info"><div class="weight-price-row"><span class="weight">2 Lt</span><span class="sub-total">0 ₺</span></div><span class="unit-price">500,00 ₺ / adet</span></div>
+                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                </div>
+            </div>
+
+            <div class="product-group">
+                <h3>Kestane Balı</h3>
+                <div class="option" data-name="Kestane Balı" data-weight="300 gr" data-price="660">
+                    <div class="product-info"><div class="weight-price-row"><span class="weight">300 gr</span><span class="sub-total">0 ₺</span></div><span class="unit-price">660,00 ₺ / adet</span></div>
+                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                </div>
+                <div class="option" data-name="Kestane Balı" data-weight="400 gr" data-price="880">
+                    <div class="product-info"><div class="weight-price-row"><span class="weight">400 gr</span><span class="sub-total">0 ₺</span></div><span class="unit-price">880,00 ₺ / adet</span></div>
+                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                </div>
+                <div class="option" data-name="Kestane Balı" data-weight="800 gr" data-price="1760">
+                    <div class="product-info"><div class="weight-price-row"><span class="weight">800 gr</span><span class="sub-total">0 ₺</span></div><span class="unit-price">1.760,00 ₺ / adet</span></div>
+                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                </div>
+                <div class="option" data-name="Kestane Balı" data-weight="1 kg" data-price="2200">
+                    <div class="product-info"><div class="weight-price-row"><span class="weight">1 kg</span><span class="sub-total">0 ₺</span></div><span class="unit-price">2.200,00 ₺ / adet</span></div>
+                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                </div>
+            </div>
+
+            <div class="product-group">
+                <h3>Çiçek Balı</h3>
+                <div class="option" data-name="Çiçek Balı" data-weight="300 gr" data-price="375">
+                    <div class="product-info"><div class="weight-price-row"><span class="weight">300 gr</span><span class="sub-total">0 ₺</span></div><span class="unit-price">375,00 ₺ / adet</span></div>
+                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                </div>
+                <div class="option" data-name="Çiçek Balı" data-weight="400 gr" data-price="500">
+                    <div class="product-info"><div class="weight-price-row"><span class="weight">400 gr</span><span class="sub-total">0 ₺</span></div><span class="unit-price">500,00 ₺ / adet</span></div>
+                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                </div>
+                <div class="option" data-name="Çiçek Balı" data-weight="800 gr" data-price="1000">
+                    <div class="product-info"><div class="weight-price-row"><span class="weight">800 gr</span><span class="sub-total">0 ₺</span></div><span class="unit-price">1.000,00 ₺ / adet</span></div>
+                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                </div>
+                <div class="option" data-name="Çiçek Balı" data-weight="1 kg" data-price="1250">
+                    <div class="product-info"><div class="weight-price-row"><span class="weight">1 kg</span><span class="sub-total">0 ₺</span></div><span class="unit-price">1.250,00 ₺ / adet</span></div>
+                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                </div>
+            </div>
+            
+            <div class="product-group">
+                <h3>Çay</h3>
+                <div class="option" data-name="Çay" data-weight="500 gr" data-price="175">
+                    <div class="product-info">
+                        <div class="weight-price-row"><span class="weight">500 gr</span><span class="sub-total">0 ₺</span></div>
+                        <span class="unit-price">175,00 ₺ / adet</span>
+                    </div>
+                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                </div>
+            </div>
+
+            <hr>
+            
+            <div id="total-container">
+                Genel Toplam: <span id="total-price">0,00 ₺</span>
+            </div>
+
+            <button type="button" id="proceedButton">Bilgileri Gir ve PDF Oluşturmaya Geç</button>
+        </form>
+    </div>
+
+    <!-- Müşteri Bilgileri Modal -->
+    <div id="customerModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 style="color: #38761d; margin-top: 0;">Müşteri Bilgileri</h2>
+            <form id="customerForm">
+                <div class="form-group">
+                    <label for="customerName">Ad Soyad <span style="color: red;">*</span></label>
+                    <input type="text" id="customerName" name="customerName" required>
+                    <div class="error-message" id="nameError">Lütfen ad soyad giriniz.</div>
+                </div>
+                <div class="form-group">
+                    <label for="customerPhone">Telefon <span style="color: red;">*</span></label>
+                    <input type="tel" id="customerPhone" name="customerPhone" placeholder="05XX XXX XX XX" required>
+                    <div class="error-message" id="phoneError">Geçerli bir telefon numarası giriniz.</div>
+                </div>
+                <div class="form-group">
+                    <label for="customerAddress">Adres <span style="color: red;">*</span></label>
+                    <textarea id="customerAddress" name="customerAddress" required></textarea>
+                    <div class="error-message" id="addressError">Lütfen adres bilgisi giriniz.</div>
+                </div>
+                <div class="form-group">
+                    <label for="customerNote">Notlar (Opsiyonel)</label>
+                    <textarea id="customerNote" name="customerNote" placeholder="Teslimat veya sipariş ile ilgili notlarınız..."></textarea>
+                </div>
+                <button type="submit" style="width: 100%; padding: 15px; background-color: #38761d; color: white; border: none; border-radius: 5px; font-size: 18px; cursor: pointer; margin-top: 10px;">PDF Oluştur ve İndir</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.min.js"></script>
+
+    <script>
+        // JavaScript Başlangıcı: Fiyat Hesaplama ve Miktar Kontrolü
+        document.addEventListener('DOMContentLoaded', () => {
+            const totalPriceElement = document.getElementById('total-price');
+            const options = document.querySelectorAll('.option');
+            const proceedButton = document.getElementById('proceedButton');
+
+            /**
+             * Genel toplamı ve ilgili ara toplamları günceller.
+             * @param {HTMLElement} option - Yalnızca bir ürünü güncellemek için kullanılır.
+             */
+            function updatePrice(option = null) {
+                
+                const optionsToUpdate = option ? [option] : options;
+
+                optionsToUpdate.forEach(item => {
+                    const quantityInput = item.querySelector('input');
+                    const subTotalElement = item.querySelector('.sub-total');
+                    
+                    const quantity = parseInt(quantityInput.value);
+                    const price = parseFloat(item.getAttribute('data-price'));
+                    
+                    let subTotal = 0;
+                    if (quantity > 0 && !isNaN(price)) {
+                        subTotal = quantity * price;
+                    }
+                    
+                    // Ara Toplamı Güncelle
+                    subTotalElement.textContent = subTotal.toFixed(2).replace('.', ',') + ' ₺';
+                });
+
+                // Tüm ürünleri tekrar dolaşarak Genel Toplamı Hesapla
+                let total = 0;
+                options.forEach(item => {
+                    const quantity = parseInt(item.querySelector('input').value);
+                    const price = parseFloat(item.getAttribute('data-price'));
+                    if (quantity > 0 && !isNaN(price)) {
+                        total += quantity * price;
+                    }
+                });
+                
+                // Genel Toplamı Güncelle
+                totalPriceElement.textContent = total.toFixed(2).replace('.', ',') + ' ₺';
+            }
+
+            // Miktar Kontrol Butonlarına Dinleyici Ekle
+            options.forEach(option => {
+                const increaseButton = option.querySelector('.increase');
+                const decreaseButton = option.querySelector('.decrease');
+                const input = option.querySelector('input');
+
+                // Artırma butonu
+                increaseButton.addEventListener('click', () => {
+                    input.value = parseInt(input.value) + 1;
+                    updatePrice(option); 
+                });
+
+                // Azaltma butonu
+                decreaseButton.addEventListener('click', () => {
+                    let value = parseInt(input.value);
+                    if (value > 0) {
+                        input.value = value - 1;
+                        updatePrice(option); 
+                    }
+                });
+            });
+            
+            // Modal İşlemleri
+            const modal = document.getElementById('customerModal');
+            const closeBtn = document.querySelector('.close');
+            const customerForm = document.getElementById('customerForm');
+
+            proceedButton.addEventListener('click', () => {
+                const selectedProducts = [];
+                let finalTotal = 0;
+
+                document.querySelectorAll('.option').forEach(option => {
+                    const quantity = parseInt(option.querySelector('input').value);
+                    const price = parseFloat(option.getAttribute('data-price'));
+
+                    if (quantity > 0) {
+                        const productName = option.getAttribute('data-name');
+                        const productWeight = option.getAttribute('data-weight');
+                        const subtotal = (quantity * price);
+                        finalTotal += subtotal;
+
+                        selectedProducts.push({
+                            name: productName,
+                            weight: productWeight,
+                            quantity: quantity,
+                            price: price,
+                            subtotal: subtotal
+                        });
+                    }
+                });
+
+                if (selectedProducts.length > 0) {
+                    window.selectedProducts = selectedProducts;
+                    window.finalTotal = finalTotal;
+                    modal.style.display = 'block';
+                } else {
+                    alert("Lütfen sepetinize en az bir ürün ekleyin.");
+                }
+            });
+
+            closeBtn.addEventListener('click', () => {
+                modal.style.display = 'none';
+            });
+
+            window.addEventListener('click', (event) => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+
+            // Form Validasyonu
+            function validatePhone(phone) {
+                const phoneRegex = /^0[5][0-9]{9}$/;
+                return phoneRegex.test(phone.replace(/\s/g, ''));
+            }
+
+            function showError(fieldId, errorId, message) {
+                const field = document.getElementById(fieldId);
+                const error = document.getElementById(errorId);
+                field.classList.add('error');
+                error.textContent = message;
+                error.style.display = 'block';
+            }
+
+            function hideError(fieldId, errorId) {
+                const field = document.getElementById(fieldId);
+                const error = document.getElementById(errorId);
+                field.classList.remove('error');
+                error.style.display = 'none';
+            }
+
+            // Form Submit İşlemi
+            customerForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const name = document.getElementById('customerName').value.trim();
+                const phone = document.getElementById('customerPhone').value.trim();
+                const address = document.getElementById('customerAddress').value.trim();
+                const note = document.getElementById('customerNote').value.trim();
+
+                let isValid = true;
+
+                // Validasyonlar
+                if (!name) {
+                    showError('customerName', 'nameError', 'Lütfen ad soyad giriniz.');
+                    isValid = false;
+                } else {
+                    hideError('customerName', 'nameError');
+                }
+
+                if (!phone) {
+                    showError('customerPhone', 'phoneError', 'Lütfen telefon numarası giriniz.');
+                    isValid = false;
+                } else if (!validatePhone(phone)) {
+                    showError('customerPhone', 'phoneError', 'Geçerli bir telefon numarası giriniz. (05XX XXX XX XX)');
+                    isValid = false;
+                } else {
+                    hideError('customerPhone', 'phoneError');
+                }
+
+                if (!address) {
+                    showError('customerAddress', 'addressError', 'Lütfen adres bilgisi giriniz.');
+                    isValid = false;
+                } else {
+                    hideError('customerAddress', 'addressError');
+                }
+
+                if (isValid) {
+                    generatePDF({
+                        name: name,
+                        phone: phone,
+                        address: address,
+                        note: note,
+                        products: window.selectedProducts,
+                        total: window.finalTotal
+                    });
+                    modal.style.display = 'none';
+                    customerForm.reset();
+                }
+            });
+
+            // PDF Oluşturma Fonksiyonu - PDFMake ile Türkçe karakter desteği
+            function generatePDF(data) {
+                const now = new Date();
+                const day = String(now.getDate()).padStart(2, '0');
+                const monthNames = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 
+                                   'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
+                const month = monthNames[now.getMonth()];
+                const year = now.getFullYear();
+                const hours = String(now.getHours()).padStart(2, '0');
+                const minutes = String(now.getMinutes()).padStart(2, '0');
+                const dateStr = `${day} ${month} ${year} ${hours}:${minutes}`;
+
+                // Ürün tablosu için satırlar
+                const productRows = data.products.map((product, index) => {
+                    const rowColor = index % 2 === 0 ? '#fafafa' : '#ffffff';
+                    return [
+                        {
+                            text: `${product.name} (${product.weight})`,
+                            fillColor: rowColor
+                        },
+                        {
+                            text: `${product.quantity} adet`,
+                            fillColor: rowColor,
+                            alignment: 'center'
+                        },
+                        {
+                            text: `${product.price.toFixed(2).replace('.', ',')} ₺`,
+                            fillColor: rowColor,
+                            alignment: 'right'
+                        },
+                        {
+                            text: `${product.subtotal.toFixed(2).replace('.', ',')} ₺`,
+                            fillColor: rowColor,
+                            alignment: 'right'
+                        }
+                    ];
+                });
+
+                const docDefinition = {
+                    pageSize: 'A4',
+                    pageMargins: [40, 60, 40, 60],
+                    defaultStyle: {
+                        font: 'Roboto',
+                        fontSize: 11
+                    },
+                    content: [
+                        // Başlık Bölümü
+                        {
+                            stack: [
+                                {
+                                    text: 'Çıtkırıldım Fındık ve Fındık Ürünleri',
+                                    fontSize: 22,
+                                    bold: true,
+                                    color: '#ffffff',
+                                    alignment: 'center',
+                                    margin: [0, 0, 0, 5]
+                                },
+                                {
+                                    text: 'Giresunnuts Sipariş Formu',
+                                    fontSize: 16,
+                                    color: '#ffffff',
+                                    alignment: 'center'
+                                }
+                            ],
+                            fillColor: '#38761d',
+                            margin: [-40, -60, -40, 20],
+                            padding: [20, 0, 20, 0]
+                        },
+                        
+                        // Müşteri Bilgileri
+                        {
+                            text: 'Müşteri Bilgileri',
+                            fontSize: 14,
+                            bold: true,
+                            color: '#38761d',
+                            margin: [0, 0, 0, 10],
+                            fillColor: '#f0f0f0',
+                            padding: [5, 0, 5, 0]
+                        },
+                        {
+                            columns: [
+                                {
+                                    width: 80,
+                                    text: 'Ad Soyad:',
+                                    bold: true
+                                },
+                                {
+                                    width: '*',
+                                    text: data.name
+                                }
+                            ],
+                            margin: [0, 0, 0, 5]
+                        },
+                        {
+                            columns: [
+                                {
+                                    width: 80,
+                                    text: 'Telefon:',
+                                    bold: true
+                                },
+                                {
+                                    width: '*',
+                                    text: data.phone
+                                }
+                            ],
+                            margin: [0, 0, 0, 5]
+                        },
+                        {
+                            columns: [
+                                {
+                                    width: 80,
+                                    text: 'Adres:',
+                                    bold: true
+                                },
+                                {
+                                    width: '*',
+                                    text: data.address
+                                }
+                            ],
+                            margin: [0, 0, 0, 5]
+                        },
+                        ...(data.note ? [{
+                            columns: [
+                                {
+                                    width: 80,
+                                    text: 'Not:',
+                                    bold: true
+                                },
+                                {
+                                    width: '*',
+                                    text: data.note
+                                }
+                            ],
+                            margin: [0, 0, 0, 10]
+                        }] : [{ text: '', margin: [0, 0, 0, 10] }]),
+
+                        // Sipariş Detayları
+                        {
+                            text: 'Sipariş Detayları',
+                            fontSize: 14,
+                            bold: true,
+                            color: '#38761d',
+                            margin: [0, 0, 0, 10],
+                            fillColor: '#f0f0f0',
+                            padding: [5, 0, 5, 0]
+                        },
+                        
+                        // Ürün Tablosu
+                        {
+                            table: {
+                                headerRows: 1,
+                                widths: ['*', 60, 80, 80],
+                                body: [
+                                    [
+                                        {
+                                            text: 'Ürün',
+                                            bold: true,
+                                            color: '#ffffff',
+                                            fillColor: '#38761d'
+                                        },
+                                        {
+                                            text: 'Miktar',
+                                            bold: true,
+                                            color: '#ffffff',
+                                            fillColor: '#38761d',
+                                            alignment: 'center'
+                                        },
+                                        {
+                                            text: 'Birim Fiyat',
+                                            bold: true,
+                                            color: '#ffffff',
+                                            fillColor: '#38761d',
+                                            alignment: 'right'
+                                        },
+                                        {
+                                            text: 'Toplam',
+                                            bold: true,
+                                            color: '#ffffff',
+                                            fillColor: '#38761d',
+                                            alignment: 'right'
+                                        }
+                                    ],
+                                    ...productRows
+                                ]
+                            },
+                            layout: {
+                                paddingLeft: function(i) { return i === 0 ? 5 : 5; },
+                                paddingRight: function(i) { return i === 0 ? 5 : 5; },
+                                paddingTop: function(i) { return i === 0 ? 5 : 5; },
+                                paddingBottom: function(i) { return i === 0 ? 5 : 5; }
+                            },
+                            margin: [0, 0, 0, 10]
+                        },
+
+                        // Genel Toplam
+                        {
+                            text: `GENEL TOPLAM: ${data.total.toFixed(2).replace('.', ',')} ₺`,
+                            fontSize: 16,
+                            bold: true,
+                            color: '#4a2d1f',
+                            alignment: 'right',
+                            fillColor: '#f6b26b',
+                            margin: [0, 10, 0, 20],
+                            padding: [10, 5, 10, 5]
+                        },
+
+                        // Tarih
+                        {
+                            text: `Sipariş Tarihi: ${dateStr}`,
+                            fontSize: 9,
+                            color: '#646464',
+                            margin: [0, 10, 0, 10]
+                        },
+
+                        // IBAN Bilgisi
+                        {
+                            text: 'Ödeme Bilgileri',
+                            fontSize: 12,
+                            bold: true,
+                            color: '#38761d',
+                            margin: [0, 10, 0, 5]
+                        },
+                        {
+                            text: 'İLKER UZUNER',
+                            fontSize: 10,
+                            bold: true,
+                            margin: [0, 0, 0, 3]
+                        },
+                        {
+                            text: 'TR600001200171900009109685',
+                            fontSize: 10,
+                            margin: [0, 0, 0, 3]
+                        },
+                        {
+                            text: 'Halkbank GİRESUN ŞUBESİ',
+                            fontSize: 10,
+                            margin: [0, 0, 0, 15]
+                        },
+
+                        // Geçerlilik Notu
+                        {
+                            text: 'Not: Bu sipariş formu 7 (yedi) gün geçerli olup ödeme yaptığınızda lütfen dekontu iletiniz.',
+                            fontSize: 9,
+                            italics: true,
+                            color: '#646464',
+                            margin: [0, 0, 0, 10]
+                        },
+
+                        // Destek Hattı
+                        {
+                            text: 'Destek Hattı: 0542 183 40 28',
+                            fontSize: 9,
+                            color: '#38761d',
+                            bold: true,
+                            margin: [0, 10, 0, 0]
+                        }
+                    ],
+                    styles: {
+                        header: {
+                            fontSize: 18,
+                            bold: true
+                        }
+                    }
+                };
+
+                // PDF oluştur ve indir
+                try {
+                    if (typeof pdfMake !== 'undefined') {
+                        pdfMake.createPdf(docDefinition).download(`Siparis_${data.name.replace(/\s/g, '_')}_${Date.now()}.pdf`);
+                        alert('PDF başarıyla oluşturuldu ve indirildi!');
+                    } else {
+                        alert('PDF kütüphanesi yüklenemedi. Lütfen sayfayı yenileyin.');
+                    }
+                } catch (error) {
+                    console.error('PDF oluşturma hatası:', error);
+                    alert('PDF oluşturulurken bir hata oluştu. Lütfen tekrar deneyin.');
+                }
+            }
+            
+            // Sayfa yüklendiğinde başlangıç fiyatını (0) göster.
+            updatePrice();
+
+        });
+        // JavaScript Bitişi
+    </script>
+</body>
+</html>
