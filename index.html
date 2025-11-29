@@ -6,19 +6,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         /* CSS: Önceki kodda kullanılan aynı stiller buraya dahildir */
-        body { font-family: Arial, sans-serif; background-color: #f4f4f9; padding: 20px; }
-        .container { max-width: 600px; margin: 0 auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        body { font-family: Arial, sans-serif; background-color: #f4f4f9; padding: 20px; margin: 0; }
+        .container { max-width: 600px; margin: 0 auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); width: 100%; box-sizing: border-box; }
         h1 { text-align: center; color: #38761d; font-size: 1.5em; }
         .product-group { border: 1px solid #ddd; border-radius: 5px; padding: 10px; margin-bottom: 20px; }
         .product-group h3 { margin-top: 0; color: #b76c33; font-size: 1.2em; }
-        .option { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px dashed #eee; flex-wrap: nowrap; }
+        .option { display: flex; flex-direction: column; padding: 8px 0; border-bottom: 1px dashed #eee; }
+        .option-row { display: flex; justify-content: space-between; align-items: center; width: 100%; }
         .product-info { display: flex; flex-direction: column; flex-grow: 1; padding-right: 10px; min-width: 0; }
         .weight-price-row { display: flex; justify-content: space-between; align-items: center; width: 100%; }
-        .unit-price { font-size: 12px; color: #555; margin-top: 2px; }
-        .sub-total { font-weight: bold; color: #007bff; min-width: 70px; text-align: right; }
-        .quantity-control { display: flex; align-items: center; margin-left: 10px; min-width: 100px; flex-shrink: 0; }
-        .quantity-control button { background-color: #38761d; color: white; border: none; padding: 8px 12px; cursor: pointer; border-radius: 4px; font-size: 16px; line-height: 1; }
-        .quantity-control input { width: 40px; text-align: center; border: 1px solid #ccc; margin: 0 5px; padding: 7px 0; font-size: 16px; -moz-appearance: textfield; appearance: textfield; }
+        .weight { font-weight: 500; min-width: 80px; }
+        .price-row { display: flex; justify-content: space-between; align-items: center; width: 100%; margin-top: 4px; }
+        .sub-total { font-weight: bold; color: #007bff; font-size: 14px; }
+        .unit-price { font-size: 11px; color: #888; }
+        .quantity-control { display: flex; flex-direction: column; align-items: center; min-width: 50px; flex-shrink: 0; gap: 4px; }
+        .quantity-control button { background-color: #38761d; color: white; border: none; padding: 6px 10px; cursor: pointer; border-radius: 4px; font-size: 14px; line-height: 1; width: 35px; }
+        .quantity-control input { width: 35px; text-align: center; border: 1px solid #ccc; margin: 0; padding: 5px 0; font-size: 14px; -moz-appearance: textfield; appearance: textfield; }
+        @media (max-width: 480px) {
+            body { padding: 10px; }
+            .container { padding: 10px; }
+            h1 { font-size: 1.1em; line-height: 1.3; }
+            .product-group { padding: 8px; margin-bottom: 15px; }
+            .product-group h3 { font-size: 1.1em; }
+            .option { padding: 6px 0; }
+            .option-row { flex-wrap: wrap; gap: 8px; }
+            .weight { min-width: 60px; font-size: 14px; }
+            .price-row { flex-direction: column; align-items: flex-start; gap: 3px; }
+            .sub-total { font-size: 13px; }
+            .unit-price { font-size: 10px; }
+            .quantity-control { min-width: auto; width: auto; margin-top: 5px; }
+            .quantity-control button { padding: 5px 8px; font-size: 12px; width: 30px; }
+            .quantity-control input { width: 30px; padding: 4px 0; font-size: 12px; }
+            #total-container { padding: 12px; font-size: 1.1em; }
+            #proceedButton { padding: 12px; font-size: 16px; }
+            .modal-content { margin: 10% auto; padding: 15px; width: 95%; }
+            .form-group input, .form-group textarea { padding: 8px; font-size: 14px; }
+        }
         .quantity-control input::-webkit-outer-spin-button,
         .quantity-control input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
         .quantity-control button:hover { background-color: #2d5a15; }
@@ -28,7 +51,7 @@
         #proceedButton:hover { background-color: #2d5a15; }
         #proceedButton:disabled { background-color: #ccc; cursor: not-allowed; }
         .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5); }
-        .modal-content { background-color: #fefefe; margin: 5% auto; padding: 20px; border: 1px solid #888; border-radius: 8px; width: 90%; max-width: 500px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+        .modal-content { background-color: #fefefe; margin: 5% auto; padding: 20px; border: 1px solid #888; border-radius: 8px; width: 90%; max-width: 500px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); box-sizing: border-box; }
         .close { color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
         .close:hover { color: #000; }
         .form-group { margin-bottom: 15px; }
@@ -39,11 +62,22 @@
         .error-message { color: #d32f2f; font-size: 14px; margin-top: 5px; display: none; }
         .form-group input.error, .form-group textarea.error { border-color: #d32f2f; }
         @media (max-width: 600px) {
-            .container { padding: 15px; }
-            h1 { font-size: 1.2em; }
-            .option { flex-wrap: wrap; }
-            .product-info { width: 100%; margin-bottom: 8px; }
-            .quantity-control { margin-left: auto; margin-top: 0; width: auto; }
+            body { padding: 12px; }
+            .container { padding: 12px; max-width: 100%; }
+            h1 { font-size: 1.15em; line-height: 1.4; }
+            .product-group { padding: 10px; }
+            .product-group h3 { font-size: 1.15em; }
+            .option { padding: 7px 0; }
+            .option-row { flex-wrap: wrap; gap: 10px; align-items: center; }
+            .weight { min-width: 70px; font-size: 15px; }
+            .price-row { gap: 5px; }
+            .sub-total { font-size: 14px; }
+            .unit-price { font-size: 10px; }
+            .quantity-control { min-width: auto; width: auto; margin-top: 8px; }
+            .quantity-control button { padding: 6px 9px; font-size: 13px; width: 32px; }
+            .quantity-control input { width: 32px; padding: 5px 0; font-size: 13px; }
+            #total-container { padding: 12px; font-size: 1.2em; }
+            #proceedButton { padding: 13px; font-size: 17px; }
         }
     </style>
 </head>
@@ -55,163 +89,339 @@
             <div class="product-group">
                 <h3>Kabuklu Fındık</h3>
                 <div class="option" data-name="Kabuklu Fındık" data-weight="500 gr" data-price="225">
-                    <div class="product-info"><div class="weight-price-row"><span class="weight">500 gr</span><span class="sub-total">0 ₺</span></div><span class="unit-price">225,00 ₺ / adet</span></div>
-                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                    <div class="option-row">
+                        <span class="weight">500 gr</span>
+                        <div class="quantity-control"><button type="button" class="increase">+</button><input type="number" value="0" min="0" readonly><button type="button" class="decrease">-</button></div>
+                    </div>
+                    <div class="price-row">
+                        <span class="unit-price">225,00 ₺ / adet</span>
+                        <span class="sub-total">0 ₺</span>
+                    </div>
+                </div>
                 </div>
                 <div class="option" data-name="Kabuklu Fındık" data-weight="1 kg" data-price="450">
-                    <div class="product-info"><div class="weight-price-row"><span class="weight">1 kg</span><span class="sub-total">0 ₺</span></div><span class="unit-price">450,00 ₺ / adet</span></div>
-                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                    <div class="option-row">
+                        <span class="weight">1 kg</span>
+                        <div class="quantity-control"><button type="button" class="increase">+</button><input type="number" value="0" min="0" readonly><button type="button" class="decrease">-</button></div>
+                    </div>
+                    <div class="price-row">
+                        <span class="unit-price">450,00 ₺ / adet</span>
+                        <span class="sub-total">0 ₺</span>
+                    </div>
+                </div>
                 </div>
             </div>
 
             <div class="product-group">
                 <h3>Kavrulmuş Fındık</h3>
                 <div class="option" data-name="Kavrulmuş Fındık" data-weight="50 gr" data-price="65">
-                    <div class="product-info"><div class="weight-price-row"><span class="weight">50 gr</span><span class="sub-total">0 ₺</span></div><span class="unit-price">65,00 ₺ / adet</span></div>
-                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                    <div class="option-row">
+                        <span class="weight">50 gr</span>
+                        <div class="quantity-control"><button type="button" class="increase">+</button><input type="number" value="0" min="0" readonly><button type="button" class="decrease">-</button></div>
+                    </div>
+                    <div class="price-row">
+                        <span class="unit-price">65,00 ₺ / adet</span>
+                        <span class="sub-total">0 ₺</span>
+                    </div>
+                </div>
                 </div>
                 <div class="option" data-name="Kavrulmuş Fındık" data-weight="100 gr" data-price="130">
-                    <div class="product-info"><div class="weight-price-row"><span class="weight">100 gr</span><span class="sub-total">0 ₺</span></div><span class="unit-price">130,00 ₺ / adet</span></div>
-                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                    <div class="option-row">
+                        <span class="weight">100 gr</span>
+                        <div class="quantity-control"><button type="button" class="increase">+</button><input type="number" value="0" min="0" readonly><button type="button" class="decrease">-</button></div>
+                    </div>
+                    <div class="price-row">
+                        <span class="unit-price">130,00 ₺ / adet                    </span>
+                        <span class="sub-total">0 ₺</span>
+                    </div>
                 </div>
                 <div class="option" data-name="Kavrulmuş Fındık" data-weight="250 gr" data-price="325">
-                    <div class="product-info"><div class="weight-price-row"><span class="weight">250 gr</span><span class="sub-total">0 ₺</span></div><span class="unit-price">325,00 ₺ / adet</span></div>
-                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                    <div class="option-row">
+                        <span class="weight">250 gr</span>
+                        <div class="quantity-control"><button type="button" class="increase">+</button><input type="number" value="0" min="0" readonly><button type="button" class="decrease">-</button></div>
+                    </div>
+                    <div class="price-row">
+                        <span class="unit-price">325,00 ₺ / adet                    </span>
+                        <span class="sub-total">0 ₺</span>
+                    </div>
                 </div>
                 <div class="option" data-name="Kavrulmuş Fındık" data-weight="500 gr" data-price="650">
-                    <div class="product-info"><div class="weight-price-row"><span class="weight">500 gr</span><span class="sub-total">0 ₺</span></div><span class="unit-price">650,00 ₺ / adet</span></div>
-                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                    <div class="option-row">
+                        <span class="weight">500 gr</span>
+                        <div class="quantity-control"><button type="button" class="increase">+</button><input type="number" value="0" min="0" readonly><button type="button" class="decrease">-</button></div>
+                    </div>
+                    <div class="price-row">
+                        <span class="unit-price">650,00 ₺ / adet                    </span>
+                        <span class="sub-total">0 ₺</span>
+                    </div>
                 </div>
                 <div class="option" data-name="Kavrulmuş Fındık" data-weight="1 kg" data-price="1300">
-                    <div class="product-info"><div class="weight-price-row"><span class="weight">1 kg</span><span class="sub-total">0 ₺</span></div><span class="unit-price">1.300,00 ₺ / adet</span></div>
-                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                    <div class="option-row">
+                        <span class="weight">1 kg</span>
+                        <div class="quantity-control"><button type="button" class="increase">+</button><input type="number" value="0" min="0" readonly><button type="button" class="decrease">-</button></div>
+                    </div>
+                    <div class="price-row">
+                        <span class="unit-price">1.300,00 ₺ / adet                    </span>
+                        <span class="sub-total">0 ₺</span>
+                    </div>
                 </div>
             </div>
 
             <div class="product-group">
                 <h3>Pikola Fındık</h3>
                 <div class="option" data-name="Pikola Fındık" data-weight="50 gr" data-price="87.5">
-                    <div class="product-info"><div class="weight-price-row"><span class="weight">50 gr</span><span class="sub-total">0 ₺</span></div><span class="unit-price">87,50 ₺ / adet</span></div>
-                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                    <div class="option-row">
+                        <span class="weight">50 gr</span>
+                        <div class="quantity-control"><button type="button" class="increase">+</button><input type="number" value="0" min="0" readonly><button type="button" class="decrease">-</button></div>
+                    </div>
+                    <div class="price-row">
+                        <span class="unit-price">87,50 ₺ / adet                    </span>
+                        <span class="sub-total">0 ₺</span>
+                    </div>
                 </div>
                 <div class="option" data-name="Pikola Fındık" data-weight="100 gr" data-price="175">
-                    <div class="product-info"><div class="weight-price-row"><span class="weight">100 gr</span><span class="sub-total">0 ₺</span></div><span class="unit-price">175,00 ₺ / adet</span></div>
-                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                    <div class="option-row">
+                        <span class="weight">100 gr</span>
+                        <div class="quantity-control"><button type="button" class="increase">+</button><input type="number" value="0" min="0" readonly><button type="button" class="decrease">-</button></div>
+                    </div>
+                    <div class="price-row">
+                        <span class="unit-price">175,00 ₺ / adet                    </span>
+                        <span class="sub-total">0 ₺</span>
+                    </div>
                 </div>
                 <div class="option" data-name="Pikola Fındık" data-weight="250 gr" data-price="437.5">
-                    <div class="product-info"><div class="weight-price-row"><span class="weight">250 gr</span><span class="sub-total">0 ₺</span></div><span class="unit-price">437,50 ₺ / adet</span></div>
-                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                    <div class="option-row">
+                        <span class="weight">250 gr</span>
+                        <div class="quantity-control"><button type="button" class="increase">+</button><input type="number" value="0" min="0" readonly><button type="button" class="decrease">-</button></div>
+                    </div>
+                    <div class="price-row">
+                        <span class="unit-price">437,50 ₺ / adet                    </span>
+                        <span class="sub-total">0 ₺</span>
+                    </div>
                 </div>
             </div>
 
             <div class="product-group">
                 <h3>Krokan</h3>
                 <div class="option" data-name="Krokan" data-weight="40 gr" data-price="70">
-                    <div class="product-info"><div class="weight-price-row"><span class="weight">40 gr</span><span class="sub-total">0 ₺</span></div><span class="unit-price">70,00 ₺ / adet</span></div>
-                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                    <div class="option-row">
+                        <span class="weight">40 gr</span>
+                        <div class="quantity-control"><button type="button" class="increase">+</button><input type="number" value="0" min="0" readonly><button type="button" class="decrease">-</button></div>
+                    </div>
+                    <div class="price-row">
+                        <span class="unit-price">70,00 ₺ / adet                    </span>
+                        <span class="sub-total">0 ₺</span>
+                    </div>
                 </div>
                 <div class="option" data-name="Krokan" data-weight="100 gr" data-price="175">
-                    <div class="product-info"><div class="weight-price-row"><span class="weight">100 gr</span><span class="sub-total">0 ₺</span></div><span class="unit-price">175,00 ₺ / adet</span></div>
-                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                    <div class="option-row">
+                        <span class="weight">100 gr</span>
+                        <div class="quantity-control"><button type="button" class="increase">+</button><input type="number" value="0" min="0" readonly><button type="button" class="decrease">-</button></div>
+                    </div>
+                    <div class="price-row">
+                        <span class="unit-price">175,00 ₺ / adet                    </span>
+                        <span class="sub-total">0 ₺</span>
+                    </div>
                 </div>
                 <div class="option" data-name="Krokan" data-weight="250 gr" data-price="437.5">
-                    <div class="product-info"><div class="weight-price-row"><span class="weight">250 gr</span><span class="sub-total">0 ₺</span></div><span class="unit-price">437,50 ₺ / adet</span></div>
-                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                    <div class="option-row">
+                        <span class="weight">250 gr</span>
+                        <div class="quantity-control"><button type="button" class="increase">+</button><input type="number" value="0" min="0" readonly><button type="button" class="decrease">-</button></div>
+                    </div>
+                    <div class="price-row">
+                        <span class="unit-price">437,50 ₺ / adet                    </span>
+                        <span class="sub-total">0 ₺</span>
+                    </div>
                 </div>
                 <div class="option" data-name="Krokan" data-weight="1 kg" data-price="1750">
-                    <div class="product-info"><div class="weight-price-row"><span class="weight">1 kg</span><span class="sub-total">0 ₺</span></div><span class="unit-price">1.750,00 ₺ / adet</span></div>
-                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                    <div class="option-row">
+                        <span class="weight">1 kg</span>
+                        <div class="quantity-control"><button type="button" class="increase">+</button><input type="number" value="0" min="0" readonly><button type="button" class="decrease">-</button></div>
+                    </div>
+                    <div class="price-row">
+                        <span class="unit-price">1.750,00 ₺ / adet                    </span>
+                        <span class="sub-total">0 ₺</span>
+                    </div>
                 </div>
             </div>
             
             <div class="product-group">
                 <h3>Fındık Ezmesi</h3>
                 <div class="option" data-name="Fındık Ezmesi" data-weight="100 gr" data-price="100">
-                    <div class="product-info"><div class="weight-price-row"><span class="weight">100 gr</span><span class="sub-total">0 ₺</span></div><span class="unit-price">100,00 ₺ / adet</span></div>
-                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                    <div class="option-row">
+                        <span class="weight">100 gr</span>
+                        <div class="quantity-control"><button type="button" class="increase">+</button><input type="number" value="0" min="0" readonly><button type="button" class="decrease">-</button></div>
+                    </div>
+                    <div class="price-row">
+                        <span class="unit-price">100,00 ₺ / adet                    </span>
+                        <span class="sub-total">0 ₺</span>
+                    </div>
                 </div>
                 <div class="option" data-name="Fındık Ezmesi" data-weight="200 gr" data-price="200">
-                    <div class="product-info"><div class="weight-price-row"><span class="weight">200 gr</span><span class="sub-total">0 ₺</span></div><span class="unit-price">200,00 ₺ / adet</span></div>
-                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                    <div class="option-row">
+                        <span class="weight">200 gr</span>
+                        <div class="quantity-control"><button type="button" class="increase">+</button><input type="number" value="0" min="0" readonly><button type="button" class="decrease">-</button></div>
+                    </div>
+                    <div class="price-row">
+                        <span class="unit-price">200,00 ₺ / adet                    </span>
+                        <span class="sub-total">0 ₺</span>
+                    </div>
                 </div>
                 <div class="option" data-name="Fındık Ezmesi" data-weight="300 gr" data-price="300">
-                    <div class="product-info"><div class="weight-price-row"><span class="weight">300 gr</span><span class="sub-total">0 ₺</span></div><span class="unit-price">300,00 ₺ / adet</span></div>
-                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                    <div class="option-row">
+                        <span class="weight">300 gr</span>
+                        <div class="quantity-control"><button type="button" class="increase">+</button><input type="number" value="0" min="0" readonly><button type="button" class="decrease">-</button></div>
+                    </div>
+                    <div class="price-row">
+                        <span class="unit-price">300,00 ₺ / adet                    </span>
+                        <span class="sub-total">0 ₺</span>
+                    </div>
                 </div>
                 <div class="option" data-name="Fındık Ezmesi" data-weight="400 gr" data-price="400">
-                    <div class="product-info"><div class="weight-price-row"><span class="weight">400 gr</span><span class="sub-total">0 ₺</span></div><span class="unit-price">400,00 ₺ / adet</span></div>
-                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                    <div class="option-row">
+                        <span class="weight">400 gr</span>
+                        <div class="quantity-control"><button type="button" class="increase">+</button><input type="number" value="0" min="0" readonly><button type="button" class="decrease">-</button></div>
+                    </div>
+                    <div class="price-row">
+                        <span class="unit-price">400,00 ₺ / adet                    </span>
+                        <span class="sub-total">0 ₺</span>
+                    </div>
                 </div>
             </div>
             
             <div class="product-group">
                 <h3>Fındık Yağı</h3>
                 <div class="option" data-name="Fındık Yağı" data-weight="1 Lt" data-price="250">
-                    <div class="product-info"><div class="weight-price-row"><span class="weight">1 Lt</span><span class="sub-total">0 ₺</span></div><span class="unit-price">250,00 ₺ / adet</span></div>
-                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                    <div class="option-row">
+                        <span class="weight">1 Lt</span>
+                        <div class="quantity-control"><button type="button" class="increase">+</button><input type="number" value="0" min="0" readonly><button type="button" class="decrease">-</button></div>
+                    </div>
+                    <div class="price-row">
+                        <span class="unit-price">250,00 ₺ / adet                    </span>
+                        <span class="sub-total">0 ₺</span>
+                    </div>
                 </div>
                 <div class="option" data-name="Fındık Yağı" data-weight="2 Lt" data-price="500">
-                    <div class="product-info"><div class="weight-price-row"><span class="weight">2 Lt</span><span class="sub-total">0 ₺</span></div><span class="unit-price">500,00 ₺ / adet</span></div>
-                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                    <div class="option-row">
+                        <span class="weight">2 Lt</span>
+                        <div class="quantity-control"><button type="button" class="increase">+</button><input type="number" value="0" min="0" readonly><button type="button" class="decrease">-</button></div>
+                    </div>
+                    <div class="price-row">
+                        <span class="unit-price">500,00 ₺ / adet                    </span>
+                        <span class="sub-total">0 ₺</span>
+                    </div>
                 </div>
             </div>
 
             <div class="product-group">
                 <h3>Kestane Balı</h3>
                 <div class="option" data-name="Kestane Balı" data-weight="300 gr" data-price="660">
-                    <div class="product-info"><div class="weight-price-row"><span class="weight">300 gr</span><span class="sub-total">0 ₺</span></div><span class="unit-price">660,00 ₺ / adet</span></div>
-                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                    <div class="option-row">
+                        <span class="weight">300 gr</span>
+                        <div class="quantity-control"><button type="button" class="increase">+</button><input type="number" value="0" min="0" readonly><button type="button" class="decrease">-</button></div>
+                    </div>
+                    <div class="price-row">
+                        <span class="unit-price">660,00 ₺ / adet                    </span>
+                        <span class="sub-total">0 ₺</span>
+                    </div>
                 </div>
                 <div class="option" data-name="Kestane Balı" data-weight="400 gr" data-price="880">
-                    <div class="product-info"><div class="weight-price-row"><span class="weight">400 gr</span><span class="sub-total">0 ₺</span></div><span class="unit-price">880,00 ₺ / adet</span></div>
-                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                    <div class="option-row">
+                        <span class="weight">400 gr</span>
+                        <div class="quantity-control"><button type="button" class="increase">+</button><input type="number" value="0" min="0" readonly><button type="button" class="decrease">-</button></div>
+                    </div>
+                    <div class="price-row">
+                        <span class="unit-price">880,00 ₺ / adet                    </span>
+                        <span class="sub-total">0 ₺</span>
+                    </div>
                 </div>
                 <div class="option" data-name="Kestane Balı" data-weight="800 gr" data-price="1760">
-                    <div class="product-info"><div class="weight-price-row"><span class="weight">800 gr</span><span class="sub-total">0 ₺</span></div><span class="unit-price">1.760,00 ₺ / adet</span></div>
-                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                    <div class="option-row">
+                        <span class="weight">800 gr</span>
+                        <div class="quantity-control"><button type="button" class="increase">+</button><input type="number" value="0" min="0" readonly><button type="button" class="decrease">-</button></div>
+                    </div>
+                    <div class="price-row">
+                        <span class="unit-price">1.760,00 ₺ / adet                    </span>
+                        <span class="sub-total">0 ₺</span>
+                    </div>
                 </div>
                 <div class="option" data-name="Kestane Balı" data-weight="1 kg" data-price="2200">
-                    <div class="product-info"><div class="weight-price-row"><span class="weight">1 kg</span><span class="sub-total">0 ₺</span></div><span class="unit-price">2.200,00 ₺ / adet</span></div>
-                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                    <div class="option-row">
+                        <span class="weight">1 kg</span>
+                        <div class="quantity-control"><button type="button" class="increase">+</button><input type="number" value="0" min="0" readonly><button type="button" class="decrease">-</button></div>
+                    </div>
+                    <div class="price-row">
+                        <span class="unit-price">2.200,00 ₺ / adet                    </span>
+                        <span class="sub-total">0 ₺</span>
+                    </div>
                 </div>
             </div>
 
             <div class="product-group">
                 <h3>Çiçek Balı</h3>
                 <div class="option" data-name="Çiçek Balı" data-weight="300 gr" data-price="375">
-                    <div class="product-info"><div class="weight-price-row"><span class="weight">300 gr</span><span class="sub-total">0 ₺</span></div><span class="unit-price">375,00 ₺ / adet</span></div>
-                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                    <div class="option-row">
+                        <span class="weight">300 gr</span>
+                        <div class="quantity-control"><button type="button" class="increase">+</button><input type="number" value="0" min="0" readonly><button type="button" class="decrease">-</button></div>
+                    </div>
+                    <div class="price-row">
+                        <span class="unit-price">375,00 ₺ / adet                    </span>
+                        <span class="sub-total">0 ₺</span>
+                    </div>
                 </div>
                 <div class="option" data-name="Çiçek Balı" data-weight="400 gr" data-price="500">
-                    <div class="product-info"><div class="weight-price-row"><span class="weight">400 gr</span><span class="sub-total">0 ₺</span></div><span class="unit-price">500,00 ₺ / adet</span></div>
-                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                    <div class="option-row">
+                        <span class="weight">400 gr</span>
+                        <div class="quantity-control"><button type="button" class="increase">+</button><input type="number" value="0" min="0" readonly><button type="button" class="decrease">-</button></div>
+                    </div>
+                    <div class="price-row">
+                        <span class="unit-price">500,00 ₺ / adet                    </span>
+                        <span class="sub-total">0 ₺</span>
+                    </div>
                 </div>
                 <div class="option" data-name="Çiçek Balı" data-weight="800 gr" data-price="1000">
-                    <div class="product-info"><div class="weight-price-row"><span class="weight">800 gr</span><span class="sub-total">0 ₺</span></div><span class="unit-price">1.000,00 ₺ / adet</span></div>
-                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                    <div class="option-row">
+                        <span class="weight">800 gr</span>
+                        <div class="quantity-control"><button type="button" class="increase">+</button><input type="number" value="0" min="0" readonly><button type="button" class="decrease">-</button></div>
+                    </div>
+                    <div class="price-row">
+                        <span class="unit-price">1.000,00 ₺ / adet                    </span>
+                        <span class="sub-total">0 ₺</span>
+                    </div>
                 </div>
                 <div class="option" data-name="Çiçek Balı" data-weight="1 kg" data-price="1250">
-                    <div class="product-info"><div class="weight-price-row"><span class="weight">1 kg</span><span class="sub-total">0 ₺</span></div><span class="unit-price">1.250,00 ₺ / adet</span></div>
-                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                    <div class="option-row">
+                        <span class="weight">1 kg</span>
+                        <div class="quantity-control"><button type="button" class="increase">+</button><input type="number" value="0" min="0" readonly><button type="button" class="decrease">-</button></div>
+                    </div>
+                    <div class="price-row">
+                        <span class="unit-price">1.250,00 ₺ / adet                    </span>
+                        <span class="sub-total">0 ₺</span>
+                    </div>
                 </div>
             </div>
             
             <div class="product-group">
                 <h3>Çay</h3>
                 <div class="option" data-name="Çay" data-weight="500 gr" data-price="175">
-                    <div class="product-info">
-                        <div class="weight-price-row"><span class="weight">500 gr</span><span class="sub-total">0 ₺</span></div>
-                        <span class="unit-price">175,00 ₺ / adet</span>
+                    <div class="option-row">
+                        <span class="weight">500 gr</span>
+                        <div class="quantity-control"><button type="button" class="increase">+</button><input type="number" value="0" min="0" readonly><button type="button" class="decrease">-</button></div>
                     </div>
-                    <div class="quantity-control"><button type="button" class="decrease">-</button><input type="number" value="0" min="0" readonly><button type="button" class="increase">+</button></div>
+                    <div class="price-row">
+                        <span class="unit-price">175,00 ₺ / adet                    </span>
+                        <span class="sub-total">0 ₺</span>
+                    </div>
                 </div>
             </div>
 
             <hr>
             
             <div id="total-container">
-                Genel Toplam: <span id="total-price">0,00 ₺</span>
-            </div>
+                Genel Toplam: <span id="total-price">0,00 ₺                    </span>
+                        <span class="sub-total">0 ₺</span>
+                    </div>
+                </div>
 
             <button type="button" id="proceedButton">Bilgileri Gir ve PDF Oluşturmaya Geç</button>
         </form>
@@ -708,6 +918,21 @@
                         alert('PDF başarıyla oluşturuldu ve indirildi!');
                     } else {
                         alert('PDF kütüphanesi yüklenemedi. Lütfen sayfayı yenileyin.');
+                    }
+                } catch (error) {
+                    console.error('PDF oluşturma hatası:', error);
+                    alert('PDF oluşturulurken bir hata oluştu. Lütfen tekrar deneyin.');
+                }
+            }
+            
+            // Sayfa yüklendiğinde başlangıç fiyatını (0) göster.
+            updatePrice();
+
+        });
+        // JavaScript Bitişi
+    </script>
+</body>
+</html>
                     }
                 } catch (error) {
                     console.error('PDF oluşturma hatası:', error);
