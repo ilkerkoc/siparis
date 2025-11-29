@@ -11,12 +11,12 @@
         h1 { text-align: center; color: #38761d; font-size: 1.5em; }
         .product-group { border: 1px solid #ddd; border-radius: 5px; padding: 10px; margin-bottom: 20px; }
         .product-group h3 { margin-top: 0; color: #b76c33; font-size: 1.2em; }
-        .option { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px dashed #eee; }
-        .product-info { display: flex; flex-direction: column; flex-grow: 1; padding-right: 10px; }
+        .option { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px dashed #eee; flex-wrap: nowrap; }
+        .product-info { display: flex; flex-direction: column; flex-grow: 1; padding-right: 10px; min-width: 0; }
         .weight-price-row { display: flex; justify-content: space-between; align-items: center; width: 100%; }
         .unit-price { font-size: 12px; color: #555; margin-top: 2px; }
         .sub-total { font-weight: bold; color: #007bff; min-width: 70px; text-align: right; }
-        .quantity-control { display: flex; align-items: center; margin-left: 10px; min-width: 100px; }
+        .quantity-control { display: flex; align-items: center; margin-left: 10px; min-width: 100px; flex-shrink: 0; }
         .quantity-control button { background-color: #38761d; color: white; border: none; padding: 8px 12px; cursor: pointer; border-radius: 4px; font-size: 16px; line-height: 1; }
         .quantity-control input { width: 40px; text-align: center; border: 1px solid #ccc; margin: 0 5px; padding: 7px 0; font-size: 16px; -moz-appearance: textfield; appearance: textfield; }
         .quantity-control input::-webkit-outer-spin-button,
@@ -41,8 +41,9 @@
         @media (max-width: 600px) {
             .container { padding: 15px; }
             h1 { font-size: 1.2em; }
-            .option { flex-direction: column; align-items: flex-start; }
-            .quantity-control { margin-top: 10px; margin-left: 0; width: 100%; }
+            .option { flex-wrap: wrap; }
+            .product-info { width: 100%; margin-bottom: 8px; }
+            .quantity-control { margin-left: auto; margin-top: 0; width: auto; }
         }
     </style>
 </head>
