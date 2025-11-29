@@ -2,7 +2,7 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>Çıtkırıldım Fındık ve Fındık Ürünleri Giresunnuts Sipariş Formu</title>
+    <title>Çıtkırıldım Fındık - Giresunnuts Hızlı Sipariş Formu</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -40,9 +40,12 @@
 </head>
 <body class="bg-gray-50 p-4 md:p-5 lg:p-6 font-sans pb-32 md:pb-36">
     <div class="max-w-2xl mx-auto bg-white p-4 md:p-5 lg:p-6 rounded-lg shadow-lg w-full box-border mb-4">
-        <h1 class="text-center text-hazelnut-green text-xl md:text-2xl font-bold mb-6 leading-tight">
-            🌰 Çıtkırıldım Fındık ve Fındık Ürünleri<br>Giresunnuts Sipariş Formu
-        </h1>
+        <div class="flex flex-col items-center mb-6">
+            <img src="https://vcard.giresunnuts.com/logo-500.png" alt="Giresunnuts Logo" class="h-20 md:h-24 mb-4 object-contain">
+            <h1 class="text-center text-hazelnut-green text-xl md:text-2xl font-bold leading-tight">
+                Çıtkırıldım Fındık - Giresunnuts <br/>Hızlı Sipariş Formu
+            </h1>
+        </div>
         <form id="orderForm">
             
             <div class="border border-gray-300 rounded-lg p-3 md:p-4 mb-5">
@@ -697,6 +700,22 @@
             });
 
             /**
+             * Sayıyı Türkçe formatına çevirir (binlik ayırıcı: nokta, decimal: virgül)
+             * @param {number} num - Formatlanacak sayı
+             * @returns {string} Formatlanmış string
+             */
+            function formatTurkishCurrency(num) {
+                const parts = num.toFixed(2).split('.');
+                const integerPart = parts[0];
+                const decimalPart = parts[1];
+                
+                // Binlik ayırıcı ekle
+                const formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+                
+                return formattedInteger + ',' + decimalPart;
+            }
+
+            /**
              * Genel toplamı ve ilgili ara toplamları günceller.
              * @param {HTMLElement} option - Yalnızca bir ürünü güncellemek için kullanılır.
              */
@@ -717,7 +736,7 @@
                     }
                     
                     // Ara Toplamı Güncelle
-                    subTotalElement.textContent = subTotal.toFixed(2).replace('.', ',') + ' ₺';
+                    subTotalElement.textContent = formatTurkishCurrency(subTotal) + ' ₺';
                 });
 
                 // Tüm ürünleri tekrar dolaşarak Genel Toplamı Hesapla
@@ -731,7 +750,7 @@
                 });
                 
                 // Genel Toplamı Güncelle
-                totalPriceElement.textContent = total.toFixed(2).replace('.', ',') + ' ₺';
+                totalPriceElement.textContent = formatTurkishCurrency(total) + ' ₺';
             }
 
             // Miktar Kontrol Butonlarına Dinleyici Ekle
@@ -901,12 +920,12 @@
                             alignment: 'center'
                         },
                         {
-                            text: `${product.price.toFixed(2).replace('.', ',')} ₺`,
+                            text: `${formatTurkishCurrency(product.price)} ₺`,
                             fillColor: rowColor,
                             alignment: 'right'
                         },
                         {
-                            text: `${product.subtotal.toFixed(2).replace('.', ',')} ₺`,
+                            text: `${formatTurkishCurrency(product.subtotal)} ₺`,
                             fillColor: rowColor,
                             alignment: 'right'
                         }
@@ -925,18 +944,12 @@
                         {
                             stack: [
                                 {
-                                    text: 'Çıtkırıldım Fındık ve Fındık Ürünleri',
+                                    text: 'Çıtkırıldım Fındık - Giresunnuts Hızlı Sipariş Formu',
                                     fontSize: 22,
                                     bold: true,
                                     color: '#ffffff',
                                     alignment: 'center',
                                     margin: [0, 0, 0, 5]
-                                },
-                                {
-                                    text: 'Giresunnuts Sipariş Formu',
-                                    fontSize: 16,
-                                    color: '#ffffff',
-                                    alignment: 'center'
                                 }
                             ],
                             fillColor: '#38761d',
@@ -1071,7 +1084,7 @@
 
                         // Genel Toplam
                         {
-                            text: `GENEL TOPLAM: ${data.total.toFixed(2).replace('.', ',')} ₺`,
+                            text: `GENEL TOPLAM: ${formatTurkishCurrency(data.total)} ₺`,
                             fontSize: 16,
                             bold: true,
                             color: '#4a2d1f',
