@@ -32,8 +32,8 @@
         }
     </style>
 </head>
-<body class="bg-gray-50 p-4 md:p-5 lg:p-6 font-sans">
-    <div class="max-w-2xl mx-auto bg-white p-4 md:p-5 lg:p-6 rounded-lg shadow-lg w-full box-border">
+<body class="bg-gray-50 p-4 md:p-5 lg:p-6 font-sans pb-32 md:pb-36">
+    <div class="max-w-2xl mx-auto bg-white p-4 md:p-5 lg:p-6 rounded-lg shadow-lg w-full box-border mb-4">
         <h1 class="text-center text-hazelnut-green text-xl md:text-2xl font-bold mb-6 leading-tight">
             🌰 Çıtkırıldım Fındık ve Fındık Ürünleri<br>Giresunnuts Sipariş Formu
         </h1>
@@ -482,15 +482,19 @@
             </div>
 
             <hr class="my-5">
-            
-            <div id="total-container" class="p-4 bg-hazelnut-orange text-hazelnut-dark rounded-lg mt-5 text-lg md:text-xl font-bold text-center">
+        </form>
+    </div>
+
+    <!-- Sabit Alt Bar - Genel Toplam ve Buton -->
+    <div class="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-300 shadow-lg p-4 md:p-5">
+        <div class="max-w-2xl mx-auto">
+            <div id="total-container" class="p-4 bg-hazelnut-orange text-hazelnut-dark rounded-lg mb-3 text-lg md:text-xl font-bold text-center">
                 Genel Toplam: <span id="total-price">0,00 ₺</span>
             </div>
-
-            <button type="button" id="proceedButton" class="w-full p-4 bg-hazelnut-green text-white border-none rounded-lg text-base md:text-lg cursor-pointer mt-3 transition-colors hover:bg-[#2d5a15] disabled:bg-gray-400 disabled:cursor-not-allowed">
+            <button type="button" id="proceedButton" class="w-full p-4 bg-hazelnut-green text-white border-none rounded-lg text-base md:text-lg cursor-pointer transition-colors hover:bg-[#2d5a15] disabled:bg-gray-400 disabled:cursor-not-allowed">
                 Bilgileri Gir ve PDF Oluşturmaya Geç
             </button>
-        </form>
+        </div>
     </div>
 
     <!-- Müşteri Bilgileri Modal -->
