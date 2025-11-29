@@ -30,6 +30,12 @@
             -moz-appearance: textfield;
             appearance: textfield;
         }
+        #quantitySelect {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            padding-right: 40px;
+        }
     </style>
 </head>
 <body class="bg-gray-50 p-4 md:p-5 lg:p-6 font-sans pb-32 md:pb-36">
@@ -43,7 +49,10 @@
                 <h3 class="mt-0 mb-3 text-hazelnut-brown text-lg md:text-xl font-semibold">Kabuklu Fındık</h3>
                 <div class="option border-b border-dashed border-gray-200 py-2" data-name="Kabuklu Fındık" data-weight="500 gr" data-price="250">
                     <div class="flex justify-between items-center w-full flex-wrap gap-2">
-                        <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">500 gr</span>
+                        <div class="flex flex-col">
+                            <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">500 gr</span>
+                            <button type="button" class="select-quantity-btn text-xs text-blue-600 hover:text-blue-800 underline mt-1 text-left">adet seç</button>
+                        </div>
                         <div class="flex flex-col items-center gap-1 min-w-[50px] shrink-0">
                             <button type="button" class="increase bg-hazelnut-green text-white border-none px-2.5 py-1.5 rounded cursor-pointer text-xs md:text-sm w-7 md:w-9 hover:bg-[#2d5a15] active:scale-95">+</button>
                             <input type="number" value="0" min="0" readonly class="w-7 md:w-9 text-center border border-gray-300 p-1 text-xs md:text-sm">
@@ -57,7 +66,10 @@
                 </div>
                 <div class="option border-b border-dashed border-gray-200 py-2" data-name="Kabuklu Fındık" data-weight="1 kg" data-price="450">
                     <div class="flex justify-between items-center w-full flex-wrap gap-2">
-                        <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">1 kg</span>
+                        <div class="flex flex-col">
+                            <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">1 kg</span>
+                            <button type="button" class="select-quantity-btn text-xs text-blue-600 hover:text-blue-800 underline mt-1 text-left">adet seç</button>
+                        </div>
                         <div class="flex flex-col items-center gap-1 min-w-[50px] shrink-0">
                             <button type="button" class="increase bg-hazelnut-green text-white border-none px-2.5 py-1.5 rounded cursor-pointer text-xs md:text-sm w-7 md:w-9 hover:bg-[#2d5a15] active:scale-95">+</button>
                             <input type="number" value="0" min="0" readonly class="w-7 md:w-9 text-center border border-gray-300 p-1 text-xs md:text-sm">
@@ -75,7 +87,10 @@
                 <h3 class="mt-0 mb-3 text-hazelnut-brown text-lg md:text-xl font-semibold">Kavrulmuş Fındık</h3>
                 <div class="option border-b border-dashed border-gray-200 py-2" data-name="Kavrulmuş Fındık" data-weight="50 gr" data-price="100">
                     <div class="flex justify-between items-center w-full flex-wrap gap-2">
-                        <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">50 gr</span>
+                        <div class="flex flex-col">
+                            <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">50 gr                        </span>
+                            <button type="button" class="select-quantity-btn text-xs text-blue-600 hover:text-blue-800 underline mt-1 text-left">adet seç</button>
+                        </div>
                         <div class="flex flex-col items-center gap-1 min-w-[50px] shrink-0">
                             <button type="button" class="increase bg-hazelnut-green text-white border-none px-2.5 py-1.5 rounded cursor-pointer text-xs md:text-sm w-7 md:w-9 hover:bg-[#2d5a15] active:scale-95">+</button>
                             <input type="number" value="0" min="0" readonly class="w-7 md:w-9 text-center border border-gray-300 p-1 text-xs md:text-sm">
@@ -89,7 +104,10 @@
                 </div>
                 <div class="option border-b border-dashed border-gray-200 py-2" data-name="Kavrulmuş Fındık" data-weight="100 gr" data-price="150">
                     <div class="flex justify-between items-center w-full flex-wrap gap-2">
-                        <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">100 gr</span>
+                        <div class="flex flex-col">
+                            <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">100 gr                        </span>
+                            <button type="button" class="select-quantity-btn text-xs text-blue-600 hover:text-blue-800 underline mt-1 text-left">adet seç</button>
+                        </div>
                         <div class="flex flex-col items-center gap-1 min-w-[50px] shrink-0">
                             <button type="button" class="increase bg-hazelnut-green text-white border-none px-2.5 py-1.5 rounded cursor-pointer text-xs md:text-sm w-7 md:w-9 hover:bg-[#2d5a15] active:scale-95">+</button>
                             <input type="number" value="0" min="0" readonly class="w-7 md:w-9 text-center border border-gray-300 p-1 text-xs md:text-sm">
@@ -103,7 +121,10 @@
                 </div>
                 <div class="option border-b border-dashed border-gray-200 py-2" data-name="Kavrulmuş Fındık" data-weight="250 gr" data-price="350">
                     <div class="flex justify-between items-center w-full flex-wrap gap-2">
-                        <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">250 gr</span>
+                        <div class="flex flex-col">
+                            <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">250 gr                        </span>
+                            <button type="button" class="select-quantity-btn text-xs text-blue-600 hover:text-blue-800 underline mt-1 text-left">adet seç</button>
+                        </div>
                         <div class="flex flex-col items-center gap-1 min-w-[50px] shrink-0">
                             <button type="button" class="increase bg-hazelnut-green text-white border-none px-2.5 py-1.5 rounded cursor-pointer text-xs md:text-sm w-7 md:w-9 hover:bg-[#2d5a15] active:scale-95">+</button>
                             <input type="number" value="0" min="0" readonly class="w-7 md:w-9 text-center border border-gray-300 p-1 text-xs md:text-sm">
@@ -117,7 +138,10 @@
                 </div>
                 <div class="option border-b border-dashed border-gray-200 py-2" data-name="Kavrulmuş Fındık" data-weight="500 gr" data-price="650">
                     <div class="flex justify-between items-center w-full flex-wrap gap-2">
-                        <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">500 gr</span>
+                        <div class="flex flex-col">
+                            <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">500 gr                        </span>
+                            <button type="button" class="select-quantity-btn text-xs text-blue-600 hover:text-blue-800 underline mt-1 text-left">adet seç</button>
+                        </div>
                         <div class="flex flex-col items-center gap-1 min-w-[50px] shrink-0">
                             <button type="button" class="increase bg-hazelnut-green text-white border-none px-2.5 py-1.5 rounded cursor-pointer text-xs md:text-sm w-7 md:w-9 hover:bg-[#2d5a15] active:scale-95">+</button>
                             <input type="number" value="0" min="0" readonly class="w-7 md:w-9 text-center border border-gray-300 p-1 text-xs md:text-sm">
@@ -131,7 +155,10 @@
                 </div>
                 <div class="option border-b border-dashed border-gray-200 py-2" data-name="Kavrulmuş Fındık" data-weight="1 kg" data-price="1300">
                     <div class="flex justify-between items-center w-full flex-wrap gap-2">
-                        <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">1 kg</span>
+                        <div class="flex flex-col">
+                            <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">1 kg                        </span>
+                            <button type="button" class="select-quantity-btn text-xs text-blue-600 hover:text-blue-800 underline mt-1 text-left">adet seç</button>
+                        </div>
                         <div class="flex flex-col items-center gap-1 min-w-[50px] shrink-0">
                             <button type="button" class="increase bg-hazelnut-green text-white border-none px-2.5 py-1.5 rounded cursor-pointer text-xs md:text-sm w-7 md:w-9 hover:bg-[#2d5a15] active:scale-95">+</button>
                             <input type="number" value="0" min="0" readonly class="w-7 md:w-9 text-center border border-gray-300 p-1 text-xs md:text-sm">
@@ -149,7 +176,10 @@
                 <h3 class="mt-0 mb-3 text-hazelnut-brown text-lg md:text-xl font-semibold">Pikola Fındık</h3>
                 <div class="option border-b border-dashed border-gray-200 py-2" data-name="Pikola Fındık" data-weight="50 gr" data-price="100">
                     <div class="flex justify-between items-center w-full flex-wrap gap-2">
-                        <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">50 gr</span>
+                        <div class="flex flex-col">
+                            <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">50 gr                        </span>
+                            <button type="button" class="select-quantity-btn text-xs text-blue-600 hover:text-blue-800 underline mt-1 text-left">adet seç</button>
+                        </div>
                         <div class="flex flex-col items-center gap-1 min-w-[50px] shrink-0">
                             <button type="button" class="increase bg-hazelnut-green text-white border-none px-2.5 py-1.5 rounded cursor-pointer text-xs md:text-sm w-7 md:w-9 hover:bg-[#2d5a15] active:scale-95">+</button>
                             <input type="number" value="0" min="0" readonly class="w-7 md:w-9 text-center border border-gray-300 p-1 text-xs md:text-sm">
@@ -163,7 +193,10 @@
                 </div>
                 <div class="option border-b border-dashed border-gray-200 py-2" data-name="Pikola Fındık" data-weight="100 gr" data-price="200">
                     <div class="flex justify-between items-center w-full flex-wrap gap-2">
-                        <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">100 gr</span>
+                        <div class="flex flex-col">
+                            <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">100 gr                        </span>
+                            <button type="button" class="select-quantity-btn text-xs text-blue-600 hover:text-blue-800 underline mt-1 text-left">adet seç</button>
+                        </div>
                         <div class="flex flex-col items-center gap-1 min-w-[50px] shrink-0">
                             <button type="button" class="increase bg-hazelnut-green text-white border-none px-2.5 py-1.5 rounded cursor-pointer text-xs md:text-sm w-7 md:w-9 hover:bg-[#2d5a15] active:scale-95">+</button>
                             <input type="number" value="0" min="0" readonly class="w-7 md:w-9 text-center border border-gray-300 p-1 text-xs md:text-sm">
@@ -177,7 +210,10 @@
                 </div>
                 <div class="option border-b border-dashed border-gray-200 py-2" data-name="Pikola Fındık" data-weight="250 gr" data-price="425">
                     <div class="flex justify-between items-center w-full flex-wrap gap-2">
-                        <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">250 gr</span>
+                        <div class="flex flex-col">
+                            <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">250 gr                        </span>
+                            <button type="button" class="select-quantity-btn text-xs text-blue-600 hover:text-blue-800 underline mt-1 text-left">adet seç</button>
+                        </div>
                         <div class="flex flex-col items-center gap-1 min-w-[50px] shrink-0">
                             <button type="button" class="increase bg-hazelnut-green text-white border-none px-2.5 py-1.5 rounded cursor-pointer text-xs md:text-sm w-7 md:w-9 hover:bg-[#2d5a15] active:scale-95">+</button>
                             <input type="number" value="0" min="0" readonly class="w-7 md:w-9 text-center border border-gray-300 p-1 text-xs md:text-sm">
@@ -195,7 +231,10 @@
                 <h3 class="mt-0 mb-3 text-hazelnut-brown text-lg md:text-xl font-semibold">Krokan</h3>
                 <div class="option border-b border-dashed border-gray-200 py-2" data-name="Krokan" data-weight="40 gr" data-price="100">
                     <div class="flex justify-between items-center w-full flex-wrap gap-2">
-                        <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">40 gr</span>
+                        <div class="flex flex-col">
+                            <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">40 gr                        </span>
+                            <button type="button" class="select-quantity-btn text-xs text-blue-600 hover:text-blue-800 underline mt-1 text-left">adet seç</button>
+                        </div>
                         <div class="flex flex-col items-center gap-1 min-w-[50px] shrink-0">
                             <button type="button" class="increase bg-hazelnut-green text-white border-none px-2.5 py-1.5 rounded cursor-pointer text-xs md:text-sm w-7 md:w-9 hover:bg-[#2d5a15] active:scale-95">+</button>
                             <input type="number" value="0" min="0" readonly class="w-7 md:w-9 text-center border border-gray-300 p-1 text-xs md:text-sm">
@@ -209,7 +248,10 @@
                 </div>
                 <div class="option border-b border-dashed border-gray-200 py-2" data-name="Krokan" data-weight="100 gr" data-price="175">
                     <div class="flex justify-between items-center w-full flex-wrap gap-2">
-                        <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">100 gr</span>
+                        <div class="flex flex-col">
+                            <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">100 gr                        </span>
+                            <button type="button" class="select-quantity-btn text-xs text-blue-600 hover:text-blue-800 underline mt-1 text-left">adet seç</button>
+                        </div>
                         <div class="flex flex-col items-center gap-1 min-w-[50px] shrink-0">
                             <button type="button" class="increase bg-hazelnut-green text-white border-none px-2.5 py-1.5 rounded cursor-pointer text-xs md:text-sm w-7 md:w-9 hover:bg-[#2d5a15] active:scale-95">+</button>
                             <input type="number" value="0" min="0" readonly class="w-7 md:w-9 text-center border border-gray-300 p-1 text-xs md:text-sm">
@@ -223,7 +265,10 @@
                 </div>
                 <div class="option border-b border-dashed border-gray-200 py-2" data-name="Krokan" data-weight="250 gr" data-price="450">
                     <div class="flex justify-between items-center w-full flex-wrap gap-2">
-                        <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">250 gr</span>
+                        <div class="flex flex-col">
+                            <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">250 gr                        </span>
+                            <button type="button" class="select-quantity-btn text-xs text-blue-600 hover:text-blue-800 underline mt-1 text-left">adet seç</button>
+                        </div>
                         <div class="flex flex-col items-center gap-1 min-w-[50px] shrink-0">
                             <button type="button" class="increase bg-hazelnut-green text-white border-none px-2.5 py-1.5 rounded cursor-pointer text-xs md:text-sm w-7 md:w-9 hover:bg-[#2d5a15] active:scale-95">+</button>
                             <input type="number" value="0" min="0" readonly class="w-7 md:w-9 text-center border border-gray-300 p-1 text-xs md:text-sm">
@@ -237,7 +282,10 @@
                 </div>
                 <div class="option border-b border-dashed border-gray-200 py-2" data-name="Krokan" data-weight="1 kg" data-price="1750">
                     <div class="flex justify-between items-center w-full flex-wrap gap-2">
-                        <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">1 kg</span>
+                        <div class="flex flex-col">
+                            <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">1 kg                        </span>
+                            <button type="button" class="select-quantity-btn text-xs text-blue-600 hover:text-blue-800 underline mt-1 text-left">adet seç</button>
+                        </div>
                         <div class="flex flex-col items-center gap-1 min-w-[50px] shrink-0">
                             <button type="button" class="increase bg-hazelnut-green text-white border-none px-2.5 py-1.5 rounded cursor-pointer text-xs md:text-sm w-7 md:w-9 hover:bg-[#2d5a15] active:scale-95">+</button>
                             <input type="number" value="0" min="0" readonly class="w-7 md:w-9 text-center border border-gray-300 p-1 text-xs md:text-sm">
@@ -255,7 +303,10 @@
                 <h3 class="mt-0 mb-3 text-hazelnut-brown text-lg md:text-xl font-semibold">Fındık Ezmesi</h3>
                 <div class="option border-b border-dashed border-gray-200 py-2" data-name="Fındık Ezmesi" data-weight="100 gr" data-price="125">
                     <div class="flex justify-between items-center w-full flex-wrap gap-2">
-                        <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">100 gr</span>
+                        <div class="flex flex-col">
+                            <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">100 gr                        </span>
+                            <button type="button" class="select-quantity-btn text-xs text-blue-600 hover:text-blue-800 underline mt-1 text-left">adet seç</button>
+                        </div>
                         <div class="flex flex-col items-center gap-1 min-w-[50px] shrink-0">
                             <button type="button" class="increase bg-hazelnut-green text-white border-none px-2.5 py-1.5 rounded cursor-pointer text-xs md:text-sm w-7 md:w-9 hover:bg-[#2d5a15] active:scale-95">+</button>
                             <input type="number" value="0" min="0" readonly class="w-7 md:w-9 text-center border border-gray-300 p-1 text-xs md:text-sm">
@@ -269,7 +320,10 @@
                 </div>
                 <div class="option border-b border-dashed border-gray-200 py-2" data-name="Fındık Ezmesi" data-weight="200 gr" data-price="250">
                     <div class="flex justify-between items-center w-full flex-wrap gap-2">
-                        <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">200 gr</span>
+                        <div class="flex flex-col">
+                            <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">200 gr                        </span>
+                            <button type="button" class="select-quantity-btn text-xs text-blue-600 hover:text-blue-800 underline mt-1 text-left">adet seç</button>
+                        </div>
                         <div class="flex flex-col items-center gap-1 min-w-[50px] shrink-0">
                             <button type="button" class="increase bg-hazelnut-green text-white border-none px-2.5 py-1.5 rounded cursor-pointer text-xs md:text-sm w-7 md:w-9 hover:bg-[#2d5a15] active:scale-95">+</button>
                             <input type="number" value="0" min="0" readonly class="w-7 md:w-9 text-center border border-gray-300 p-1 text-xs md:text-sm">
@@ -283,7 +337,10 @@
                 </div>
                 <div class="option border-b border-dashed border-gray-200 py-2" data-name="Fındık Ezmesi" data-weight="300 gr" data-price="300">
                     <div class="flex justify-between items-center w-full flex-wrap gap-2">
-                        <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">300 gr</span>
+                        <div class="flex flex-col">
+                            <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">300 gr                        </span>
+                            <button type="button" class="select-quantity-btn text-xs text-blue-600 hover:text-blue-800 underline mt-1 text-left">adet seç</button>
+                        </div>
                         <div class="flex flex-col items-center gap-1 min-w-[50px] shrink-0">
                             <button type="button" class="increase bg-hazelnut-green text-white border-none px-2.5 py-1.5 rounded cursor-pointer text-xs md:text-sm w-7 md:w-9 hover:bg-[#2d5a15] active:scale-95">+</button>
                             <input type="number" value="0" min="0" readonly class="w-7 md:w-9 text-center border border-gray-300 p-1 text-xs md:text-sm">
@@ -297,7 +354,10 @@
                 </div>
                 <div class="option border-b border-dashed border-gray-200 py-2" data-name="Fındık Ezmesi" data-weight="400 gr" data-price="400">
                     <div class="flex justify-between items-center w-full flex-wrap gap-2">
-                        <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">400 gr</span>
+                        <div class="flex flex-col">
+                            <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">400 gr                        </span>
+                            <button type="button" class="select-quantity-btn text-xs text-blue-600 hover:text-blue-800 underline mt-1 text-left">adet seç</button>
+                        </div>
                         <div class="flex flex-col items-center gap-1 min-w-[50px] shrink-0">
                             <button type="button" class="increase bg-hazelnut-green text-white border-none px-2.5 py-1.5 rounded cursor-pointer text-xs md:text-sm w-7 md:w-9 hover:bg-[#2d5a15] active:scale-95">+</button>
                             <input type="number" value="0" min="0" readonly class="w-7 md:w-9 text-center border border-gray-300 p-1 text-xs md:text-sm">
@@ -315,7 +375,10 @@
                 <h3 class="mt-0 mb-3 text-hazelnut-brown text-lg md:text-xl font-semibold">Fındık Yağı</h3>
                 <div class="option border-b border-dashed border-gray-200 py-2" data-name="Fındık Yağı" data-weight="1 Lt" data-price="250">
                     <div class="flex justify-between items-center w-full flex-wrap gap-2">
-                        <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">1 Lt</span>
+                        <div class="flex flex-col">
+                            <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">1 Lt                        </span>
+                            <button type="button" class="select-quantity-btn text-xs text-blue-600 hover:text-blue-800 underline mt-1 text-left">adet seç</button>
+                        </div>
                         <div class="flex flex-col items-center gap-1 min-w-[50px] shrink-0">
                             <button type="button" class="increase bg-hazelnut-green text-white border-none px-2.5 py-1.5 rounded cursor-pointer text-xs md:text-sm w-7 md:w-9 hover:bg-[#2d5a15] active:scale-95">+</button>
                             <input type="number" value="0" min="0" readonly class="w-7 md:w-9 text-center border border-gray-300 p-1 text-xs md:text-sm">
@@ -329,7 +392,10 @@
                 </div>
                 <div class="option border-b border-dashed border-gray-200 py-2" data-name="Fındık Yağı" data-weight="2 Lt" data-price="475">
                     <div class="flex justify-between items-center w-full flex-wrap gap-2">
-                        <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">2 Lt</span>
+                        <div class="flex flex-col">
+                            <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">2 Lt                        </span>
+                            <button type="button" class="select-quantity-btn text-xs text-blue-600 hover:text-blue-800 underline mt-1 text-left">adet seç</button>
+                        </div>
                         <div class="flex flex-col items-center gap-1 min-w-[50px] shrink-0">
                             <button type="button" class="increase bg-hazelnut-green text-white border-none px-2.5 py-1.5 rounded cursor-pointer text-xs md:text-sm w-7 md:w-9 hover:bg-[#2d5a15] active:scale-95">+</button>
                             <input type="number" value="0" min="0" readonly class="w-7 md:w-9 text-center border border-gray-300 p-1 text-xs md:text-sm">
@@ -347,7 +413,10 @@
                 <h3 class="mt-0 mb-3 text-hazelnut-brown text-lg md:text-xl font-semibold">Kestane Balı</h3>
                 <div class="option border-b border-dashed border-gray-200 py-2" data-name="Kestane Balı" data-weight="300 gr" data-price="700">
                     <div class="flex justify-between items-center w-full flex-wrap gap-2">
-                        <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">300 gr</span>
+                        <div class="flex flex-col">
+                            <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">300 gr                        </span>
+                            <button type="button" class="select-quantity-btn text-xs text-blue-600 hover:text-blue-800 underline mt-1 text-left">adet seç</button>
+                        </div>
                         <div class="flex flex-col items-center gap-1 min-w-[50px] shrink-0">
                             <button type="button" class="increase bg-hazelnut-green text-white border-none px-2.5 py-1.5 rounded cursor-pointer text-xs md:text-sm w-7 md:w-9 hover:bg-[#2d5a15] active:scale-95">+</button>
                             <input type="number" value="0" min="0" readonly class="w-7 md:w-9 text-center border border-gray-300 p-1 text-xs md:text-sm">
@@ -361,7 +430,10 @@
                 </div>
                 <div class="option border-b border-dashed border-gray-200 py-2" data-name="Kestane Balı" data-weight="400 gr" data-price="900">
                     <div class="flex justify-between items-center w-full flex-wrap gap-2">
-                        <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">400 gr</span>
+                        <div class="flex flex-col">
+                            <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">400 gr                        </span>
+                            <button type="button" class="select-quantity-btn text-xs text-blue-600 hover:text-blue-800 underline mt-1 text-left">adet seç</button>
+                        </div>
                         <div class="flex flex-col items-center gap-1 min-w-[50px] shrink-0">
                             <button type="button" class="increase bg-hazelnut-green text-white border-none px-2.5 py-1.5 rounded cursor-pointer text-xs md:text-sm w-7 md:w-9 hover:bg-[#2d5a15] active:scale-95">+</button>
                             <input type="number" value="0" min="0" readonly class="w-7 md:w-9 text-center border border-gray-300 p-1 text-xs md:text-sm">
@@ -375,7 +447,10 @@
                 </div>
                 <div class="option border-b border-dashed border-gray-200 py-2" data-name="Kestane Balı" data-weight="800 gr" data-price="1750">
                     <div class="flex justify-between items-center w-full flex-wrap gap-2">
-                        <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">800 gr</span>
+                        <div class="flex flex-col">
+                            <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">800 gr                        </span>
+                            <button type="button" class="select-quantity-btn text-xs text-blue-600 hover:text-blue-800 underline mt-1 text-left">adet seç</button>
+                        </div>
                         <div class="flex flex-col items-center gap-1 min-w-[50px] shrink-0">
                             <button type="button" class="increase bg-hazelnut-green text-white border-none px-2.5 py-1.5 rounded cursor-pointer text-xs md:text-sm w-7 md:w-9 hover:bg-[#2d5a15] active:scale-95">+</button>
                             <input type="number" value="0" min="0" readonly class="w-7 md:w-9 text-center border border-gray-300 p-1 text-xs md:text-sm">
@@ -389,7 +464,10 @@
                 </div>
                 <div class="option border-b border-dashed border-gray-200 py-2" data-name="Kestane Balı" data-weight="1 kg" data-price="2250">
                     <div class="flex justify-between items-center w-full flex-wrap gap-2">
-                        <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">1 kg</span>
+                        <div class="flex flex-col">
+                            <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">1 kg                        </span>
+                            <button type="button" class="select-quantity-btn text-xs text-blue-600 hover:text-blue-800 underline mt-1 text-left">adet seç</button>
+                        </div>
                         <div class="flex flex-col items-center gap-1 min-w-[50px] shrink-0">
                             <button type="button" class="increase bg-hazelnut-green text-white border-none px-2.5 py-1.5 rounded cursor-pointer text-xs md:text-sm w-7 md:w-9 hover:bg-[#2d5a15] active:scale-95">+</button>
                             <input type="number" value="0" min="0" readonly class="w-7 md:w-9 text-center border border-gray-300 p-1 text-xs md:text-sm">
@@ -407,7 +485,10 @@
                 <h3 class="mt-0 mb-3 text-hazelnut-brown text-lg md:text-xl font-semibold">Çiçek Balı</h3>
                 <div class="option border-b border-dashed border-gray-200 py-2" data-name="Çiçek Balı" data-weight="300 gr" data-price="400">
                     <div class="flex justify-between items-center w-full flex-wrap gap-2">
-                        <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">300 gr</span>
+                        <div class="flex flex-col">
+                            <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">300 gr                        </span>
+                            <button type="button" class="select-quantity-btn text-xs text-blue-600 hover:text-blue-800 underline mt-1 text-left">adet seç</button>
+                        </div>
                         <div class="flex flex-col items-center gap-1 min-w-[50px] shrink-0">
                             <button type="button" class="increase bg-hazelnut-green text-white border-none px-2.5 py-1.5 rounded cursor-pointer text-xs md:text-sm w-7 md:w-9 hover:bg-[#2d5a15] active:scale-95">+</button>
                             <input type="number" value="0" min="0" readonly class="w-7 md:w-9 text-center border border-gray-300 p-1 text-xs md:text-sm">
@@ -421,7 +502,10 @@
                 </div>
                 <div class="option border-b border-dashed border-gray-200 py-2" data-name="Çiçek Balı" data-weight="400 gr" data-price="500">
                     <div class="flex justify-between items-center w-full flex-wrap gap-2">
-                        <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">400 gr</span>
+                        <div class="flex flex-col">
+                            <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">400 gr                        </span>
+                            <button type="button" class="select-quantity-btn text-xs text-blue-600 hover:text-blue-800 underline mt-1 text-left">adet seç</button>
+                        </div>
                         <div class="flex flex-col items-center gap-1 min-w-[50px] shrink-0">
                             <button type="button" class="increase bg-hazelnut-green text-white border-none px-2.5 py-1.5 rounded cursor-pointer text-xs md:text-sm w-7 md:w-9 hover:bg-[#2d5a15] active:scale-95">+</button>
                             <input type="number" value="0" min="0" readonly class="w-7 md:w-9 text-center border border-gray-300 p-1 text-xs md:text-sm">
@@ -435,7 +519,10 @@
                 </div>
                 <div class="option border-b border-dashed border-gray-200 py-2" data-name="Çiçek Balı" data-weight="800 gr" data-price="1000">
                     <div class="flex justify-between items-center w-full flex-wrap gap-2">
-                        <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">800 gr</span>
+                        <div class="flex flex-col">
+                            <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">800 gr                        </span>
+                            <button type="button" class="select-quantity-btn text-xs text-blue-600 hover:text-blue-800 underline mt-1 text-left">adet seç</button>
+                        </div>
                         <div class="flex flex-col items-center gap-1 min-w-[50px] shrink-0">
                             <button type="button" class="increase bg-hazelnut-green text-white border-none px-2.5 py-1.5 rounded cursor-pointer text-xs md:text-sm w-7 md:w-9 hover:bg-[#2d5a15] active:scale-95">+</button>
                             <input type="number" value="0" min="0" readonly class="w-7 md:w-9 text-center border border-gray-300 p-1 text-xs md:text-sm">
@@ -449,7 +536,10 @@
                 </div>
                 <div class="option border-b border-dashed border-gray-200 py-2" data-name="Çiçek Balı" data-weight="1 kg" data-price="1250">
                     <div class="flex justify-between items-center w-full flex-wrap gap-2">
-                        <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">1 kg</span>
+                        <div class="flex flex-col">
+                            <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">1 kg                        </span>
+                            <button type="button" class="select-quantity-btn text-xs text-blue-600 hover:text-blue-800 underline mt-1 text-left">adet seç</button>
+                        </div>
                         <div class="flex flex-col items-center gap-1 min-w-[50px] shrink-0">
                             <button type="button" class="increase bg-hazelnut-green text-white border-none px-2.5 py-1.5 rounded cursor-pointer text-xs md:text-sm w-7 md:w-9 hover:bg-[#2d5a15] active:scale-95">+</button>
                             <input type="number" value="0" min="0" readonly class="w-7 md:w-9 text-center border border-gray-300 p-1 text-xs md:text-sm">
@@ -467,7 +557,10 @@
                 <h3 class="mt-0 mb-3 text-hazelnut-brown text-lg md:text-xl font-semibold">Çay</h3>
                 <div class="option border-b border-dashed border-gray-200 py-2" data-name="Çay" data-weight="500 gr" data-price="175">
                     <div class="flex justify-between items-center w-full flex-wrap gap-2">
-                        <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">500 gr</span>
+                        <div class="flex flex-col">
+                            <span class="font-medium min-w-[60px] md:min-w-[80px] text-sm md:text-base">500 gr                        </span>
+                            <button type="button" class="select-quantity-btn text-xs text-blue-600 hover:text-blue-800 underline mt-1 text-left">adet seç</button>
+                        </div>
                         <div class="flex flex-col items-center gap-1 min-w-[50px] shrink-0">
                             <button type="button" class="increase bg-hazelnut-green text-white border-none px-2.5 py-1.5 rounded cursor-pointer text-xs md:text-sm w-7 md:w-9 hover:bg-[#2d5a15] active:scale-95">+</button>
                             <input type="number" value="0" min="0" readonly class="w-7 md:w-9 text-center border border-gray-300 p-1 text-xs md:text-sm">
@@ -493,6 +586,23 @@
             </div>
             <button type="button" id="proceedButton" class="w-full p-4 bg-hazelnut-green text-white border-none rounded-lg text-base md:text-lg cursor-pointer transition-colors hover:bg-[#2d5a15] disabled:bg-gray-400 disabled:cursor-not-allowed">
                 Bilgileri Gir ve PDF Oluşturmaya Geç
+            </button>
+        </div>
+    </div>
+
+    <!-- Adet Seçim Modal -->
+    <div id="quantityModal" class="hidden fixed z-[1001] left-0 top-0 w-full h-full overflow-auto bg-black/50">
+        <div class="bg-white m-[5%] auto p-5 border border-gray-400 rounded-lg w-[90%] max-w-md shadow-lg box-border">
+            <span class="close-quantity text-gray-400 float-right text-3xl font-bold cursor-pointer hover:text-black">&times;</span>
+            <h2 class="text-hazelnut-green mt-0 mb-4 text-xl font-bold">Adet Seç</h2>
+            <div class="mb-4">
+                <label for="quantitySelect" class="block mb-2 text-gray-800 font-bold">Adet:</label>
+                <select id="quantitySelect" class="w-full p-3 border border-gray-300 rounded text-lg box-border focus:outline-none focus:border-hazelnut-green appearance-none bg-white">
+                    <!-- Options will be generated by JavaScript -->
+                </select>
+            </div>
+            <button type="button" id="confirmQuantityBtn" class="w-full p-4 bg-hazelnut-green text-white border-none rounded-lg text-base md:text-lg cursor-pointer transition-colors hover:bg-[#2d5a15]">
+                Onayla
             </button>
         </div>
     </div>
@@ -538,6 +648,53 @@
             const totalPriceElement = document.getElementById('total-price');
             const options = document.querySelectorAll('.option');
             const proceedButton = document.getElementById('proceedButton');
+            
+            // Adet Seçim Modal İşlemleri
+            const quantityModal = document.getElementById('quantityModal');
+            const quantitySelect = document.getElementById('quantitySelect');
+            const confirmQuantityBtn = document.getElementById('confirmQuantityBtn');
+            const closeQuantityBtn = document.querySelector('.close-quantity');
+            let currentOptionElement = null;
+            
+            // Selectbox için 1-1000 arası option'ları oluştur
+            for (let i = 0; i <= 1000; i++) {
+                const option = document.createElement('option');
+                option.value = i;
+                option.textContent = i;
+                quantitySelect.appendChild(option);
+            }
+            
+            // "adet seç" butonlarına tıklama event'i
+            document.querySelectorAll('.select-quantity-btn').forEach((btn) => {
+                btn.addEventListener('click', () => {
+                    currentOptionElement = btn.closest('.option');
+                    const currentQuantity = parseInt(currentOptionElement.querySelector('input').value) || 0;
+                    quantitySelect.value = currentQuantity;
+                    quantityModal.classList.remove('hidden');
+                });
+            });
+            
+            // Modal kapatma
+            closeQuantityBtn.addEventListener('click', () => {
+                quantityModal.classList.add('hidden');
+            });
+            
+            window.addEventListener('click', (event) => {
+                if (event.target === quantityModal) {
+                    quantityModal.classList.add('hidden');
+                }
+            });
+            
+            // Onayla butonu
+            confirmQuantityBtn.addEventListener('click', () => {
+                if (currentOptionElement) {
+                    const selectedQuantity = parseInt(quantitySelect.value);
+                    const input = currentOptionElement.querySelector('input');
+                    input.value = selectedQuantity;
+                    updatePrice(currentOptionElement);
+                    quantityModal.classList.add('hidden');
+                }
+            });
 
             /**
              * Genel toplamı ve ilgili ara toplamları günceller.
