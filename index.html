@@ -835,11 +835,6 @@
             });
 
             // Form Validasyonu
-            function validatePhone(phone) {
-                const phoneRegex = /^0[5][0-9]{9}$/;
-                return phoneRegex.test(phone.replace(/\s/g, ''));
-            }
-
             function showError(fieldId, errorId, message) {
                 const field = document.getElementById(fieldId);
                 const error = document.getElementById(errorId);
@@ -876,9 +871,6 @@
 
                 if (!phone) {
                     showError('customerPhone', 'phoneError', 'Lütfen telefon numarası giriniz.');
-                    isValid = false;
-                } else if (!validatePhone(phone)) {
-                    showError('customerPhone', 'phoneError', 'Geçerli bir telefon numarası giriniz. (05XX XXX XX XX)');
                     isValid = false;
                 } else {
                     hideError('customerPhone', 'phoneError');
